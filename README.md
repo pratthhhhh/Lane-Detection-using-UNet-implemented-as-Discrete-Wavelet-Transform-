@@ -24,6 +24,3 @@ from model import LaneDetector
 detector = LaneDetector()
 result = detector.detect_lanes('image.jpg')
 ```
-
-## License
-MIT License
