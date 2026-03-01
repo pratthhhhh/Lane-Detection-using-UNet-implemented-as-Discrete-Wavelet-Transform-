@@ -1,14 +1,7 @@
-"""
-model.py
---------
-Defines the U-Net architecture that uses Haar Discrete Wavelet Transform
-layers for downsampling (encoder) and inverse DWT for upsampling (decoder).
-"""
-
 from imports import *
 
 
-# ── Custom Haar Wavelet Layer (downsampling) ──────────────────────────────────
+#  Custom Haar Wavelet Layer (downsampling) 
 class HaarWaveletLayer(layers.Layer):
     def __init__(self, **kwargs):
         super(HaarWaveletLayer, self).__init__(**kwargs)
@@ -30,7 +23,7 @@ class HaarWaveletLayer(layers.Layer):
         return LL, LH, HL, HH
 
 
-# ── Custom Inverse Haar Wavelet Layer (upsampling) ────────────────────────────
+#  Custom Inverse Haar Wavelet Layer (upsampling) 
 class InverseHaarWaveletLayer(layers.Layer):
     def __init__(self, **kwargs):
         super(InverseHaarWaveletLayer, self).__init__(**kwargs)
@@ -48,13 +41,13 @@ class InverseHaarWaveletLayer(layers.Layer):
         return reconstructed
 
 
-# ── Convolution block ─────────────────────────────────────────────────────────
+#  Convolution block ─
 def conv_block(x, filters, kernel_size=30, activation='relu'):
     x = layers.Conv2D(filters, kernel_size, padding='same', activation=activation)(x)
     return x
 
 
-# ── U-Net with Haar DWT ────────────────────────────────────────────────────────
+#  U-Net with Haar DWT 
 def unet(input_shape):
     inputs = layers.Input(shape=input_shape)
     x = inputs

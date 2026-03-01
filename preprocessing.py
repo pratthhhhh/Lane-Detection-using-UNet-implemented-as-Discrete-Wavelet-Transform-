@@ -1,17 +1,7 @@
-"""
-preprocessing.py
-----------------
-Label-encodes masks, normalises images, and splits data into
-train/validation sets.
-
-Expects `xtrain` and `ytrain` to have been created by data_loader.py.
-Run data_loader.py first (or import its variables) before executing this script.
-"""
-
 from imports import *
 from data_loader import xtrain, ytrain
 
-# ── Label-encode masks ────────────────────────────────────────────────────────
+#  Label-encode masks 
 labelencoder = LabelEncoder()
 n, h, w = ytrain.shape
 train_masks_reshaped         = ytrain.reshape(-1, 1)
@@ -23,13 +13,13 @@ print("Unique encoded mask values:", np.unique(train_masks_encoded_original_shap
 train_masks_input = np.expand_dims(train_masks_encoded_original_shape, axis=3)
 print("xtrain shape:", np.shape(xtrain), "  train_masks_input shape:", np.shape(train_masks_input))
 
-# ── Train / validation split ──────────────────────────────────────────────────
+#  Train / validation split 
 X_train, X_do_not_use, y_train, y_do_not_use = train_test_split(
     xtrain, ytrain, test_size=0.2, random_state=0
 )
 print(f"Split sizes — train: {len(X_train)}, hold-out: {len(X_do_not_use)}")
 
-# ── Normalise ─────────────────────────────────────────────────────────────────
+#  Normalise ─
 X_train_normalized      = X_train.astype('float32')      / 255.0
 X_do_not_use_normalized = X_do_not_use.astype('float32') / 255.0
 
@@ -42,7 +32,7 @@ print(len(X_train_normalized), len(y_train_normalized),
 print("Class values in the dataset are ...",
       np.unique(y_train), np.unique(y_train).__len__())
 
-# ── Visualise a sample after encoding ────────────────────────────────────────
+#  Visualise a sample after encoding 
 image_number = random.randint(0, 100)
 image = xtrain[image_number]
 mask  = train_masks_input[image_number]

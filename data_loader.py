@@ -1,12 +1,6 @@
-"""
-data_loader.py
---------------
-Loads training images (X) and mask images (y) from disk.
-"""
-
 from imports import *
 
-# ── Config ──────────────────────────────────────────────────────────────────
+#  Config 
 SIZE_X = 640
 SIZE_Y = 640
 n_classes = 3  # Number of classes for segmentation
@@ -14,7 +8,7 @@ n_classes = 3  # Number of classes for segmentation
 xpath = "./train/images"
 ypath = "./train/masks.jpg"
 
-# ── Load images ──────────────────────────────────────────────────────────────
+#  Load images 
 xfiles = sorted(os.listdir(xpath))
 
 xtrain = []
@@ -31,7 +25,7 @@ for i in tqdm(xfiles):
 xtrain = np.array(xtrain)
 print("xtrain shape:", np.shape(xtrain))
 
-# ── Load masks ───────────────────────────────────────────────────────────────
+#  Load masks ─
 img_paths = sorted(glob.glob(os.path.join(ypath, "*.jpg")))
 
 ytrain = []
@@ -44,7 +38,7 @@ ytrain = np.array(ytrain)
 print("ytrain shape:", np.shape(ytrain))
 print("Unique mask values:", np.unique(ytrain))
 
-# ── Quick sanity-check visualisation ─────────────────────────────────────────
+#  Quick sanity-check visualisation ─
 image_number = random.randint(0, 100)
 image = xtrain[image_number]
 mask  = ytrain[image_number]
