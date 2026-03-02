@@ -67,7 +67,6 @@ To start training the U-Net DWT model on your data, simply run:
 ```bash
 python train.py
 ```
-*Note: `train.py` will automatically invoke `data_loader.py` and `preprocessing.py` to prepare the data. The script will train the model for 10 epochs using MSE loss and save the weights as `unet_dwt_model.keras.h5`.*
 
 ### 2. Predict and Visualize
 Once the model is trained, you can run inference to see the predictions compared against the ground truth masks:
